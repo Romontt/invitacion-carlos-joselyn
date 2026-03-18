@@ -1,0 +1,12 @@
+:root {
+  --verde-bosque: #1b3022;  /* Verde Esmeralda Profundo */
+  --dorado-mate: #c5a059;   /* Dorado elegante */
+  --vino-tinto: #6b1111;    /* Acento para botones */
+  --blanco-crema: #fdfaf5;  /* Para textos suaves sobre verde */
+}
+
+body {
+  background-color: var(--verde-bosque);
+  color: var(--blanco-crema);
+  font-family: 'Playfair Display', serif; /* Tipografía elegante */
+}
