@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda de Carlos & Joselyn - 19.12.2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <section class="hero">
+        <div class="overlay">
+            <p class="welcome-text">Bienvenidos a la invitación de</p>
+            <div class="monogram">C&J</div>
+            <h1 class="names">Carlos & Joselyn</h1>
+            <p class="music-note">La música de fondo es parte de la experiencia</p>
+            <div class="music-buttons">
+                <button class="btn-vino" onclick="playMusic()">Ingresar con música</button>
+                <button class="btn-outline" onclick="startExperience()">Ingresar sin música</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="countdown-section">
+        <div class="container">
+            <h2 class="quote">"El amor no consiste en mirarse el uno al otro, sino en mirar juntos en la misma dirección."</h2>
+            
+            <div class="countdown-circle">
+                <p>Falta</p>
+                <div id="timer" class="timer-grid">
+                    <div><span id="days">00</span><small>DÍAS</small></div>
+                    <div><span id="hours">00</span><small>HS</small></div>
+                    <div><span id="minutes">00</span><small>MIN</small></div>
+                    <div><span id="seconds">00</span><small>SEG</small></div>
+                </div>
+            </div>
+
+            <div class="guest-info">
+                <div class="guest-count-badge">3</div>
+                <h3>INVITADOS</h3>
+                <p class="family-names">Familia Rodríguez Pérez</p>
+                <p class="event-location">Luna Azul, Pococí</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="event-details">
+        <div class="detail-card ceremony">
+            <div class="icon-circle">💍</div>
+            <h3>Ceremonia</h3>
+            <p><strong>DÍA:</strong> Sábado 19 de Diciembre - 04:00 pm</p>
+            <p><strong>LUGAR:</strong> Luna Azul</p>
+            <button class="btn-vino" onclick="agendarEvento('Ceremonia')">Agendar</button>
+            <a href="https://maps.app.goo.gl/TjhYtUM4mhmAkefN8" target="_blank" class="btn-outline">¿Cómo Llegar?</a>
+        </div>
+
+        <div class="detail-card celebration">
+            <div class="icon-circle">🥂</div>
+            <h3>Recepción</h3>
+            <p><strong>DÍA:</strong> Sábado 19 de Diciembre - 05:00 pm</p>
+            <p><strong>LUGAR:</strong> Luna Azul</p>
+            <button class="btn-vino" onclick="agendarEvento('Recepción')">Agendar</button>
+            <button class="btn-outline" onclick="openModal('modal-confirmacion')">Confirmar Asistencia</button>
+        </div>
+    </section>
+
+    <section class="gifts">
+        <div class="container">
+            <h3>Regalos</h3>
+            <p>Si deseas regalarnos algo más que tu hermosa presencia...</p>
+            <div class="gift-icon">✉️</div>
+            <p>Nuestra mayor alegría es compartir con ustedes.</p>
+            <button class="btn-vino" onclick="openModal('modal-regalos')">Ver detalles de regalo</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-names">Carlos & Joselyn</div>
+        <p>19.12.2026</p>
+        <p><small>Desarrollado con ❤️ por Fixdate Costa Rica 🇨🇷</small></p>
+    </footer>
+
+    <div id="modal-confirmacion" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-confirmacion')">&times;</span>
+            <h3 class="gold-text">Confirmar Asistencia</h3>
+            <p>Nos encantaría que nos acompañes en este día tan especial.</p>
+            <form id="form-asistencia">
+                <input type="text" placeholder="Nombre Completo" required>
+                <select required>
+                    <option value="" disabled selected>¿Asistirás?</option>
+                    <option value="si">Sí, asistiré</option>
+                    <option value="no">No podré asistir</option>
+                </select>
+                <textarea placeholder="¿Alguna restricción alimenticia o mensaje para los novios?" rows="3"></textarea>
+                <button type="submit" class="btn-vino">Enviar Confirmación</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-regalos" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-regalos')">&times;</span>
+            <div class="gift-icon-large">✉️</div>
+            <h3 class="gold-text">Lluvia de Sobres</h3>
+            <p>Tu presencia es nuestro mejor regalo, pero si deseas tener un detalle con nosotros, optamos por la modalidad de <strong>Lluvia de Sobres</strong>.</p>
+            <div class="divider"></div>
+            <p><small>Podrás depositar tu sobre en el buzón especial que estará ubicado en la entrada de la recepción en <strong>Luna Azul</strong>.</small></p>
+            <button class="btn-outline" onclick="closeModal('modal-regalos')">Entendido</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
