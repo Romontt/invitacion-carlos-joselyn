@@ -4,158 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boda de Carlos & Joselyn</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --verde: #1b3022;
+            --verde-fondo: #0d1a10;
+            --verde-tarjeta: #1a2e1d;
             --dorado: #c5a059;
             --vino: #6b1111;
-            --blanco: #ffffff;
+            --blanco-crema: #fdfaf5;
         }
 
-        body {
-            margin: 0;
-            background-color: var(--verde);
-            color: var(--blanco);
-            font-family: 'Montserrat', sans-serif;
-            text-align: center;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--verde-fondo); color: var(--blanco-crema); text-align: center; }
+
+        /* --- LANDING (ENTRADA) --- */
+        #landing {
+            height: 100vh; width: 100%; position: fixed; z-index: 1000;
+            background: linear-gradient(rgba(13,26,16,0.8), rgba(13,26,16,0.9)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1350&q=80') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: transform 0.8s ease-in-out;
         }
+        .monograma { font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--dorado); border-top: 2px solid var(--dorado); border-bottom: 2px solid var(--dorado); padding: 10px 40px; margin-bottom: 20px; }
+        .btn-vino { background: var(--vino); color: white; border: none; padding: 15px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 10px; }
+        .btn-outline { background: transparent; border: 1px solid var(--dorado); color: var(--dorado); padding: 15px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; text-decoration: none; display: inline-block; }
 
-        /* --- PORTADA --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+        /* --- CONTENIDO PRINCIPAL --- */
+        #main-content { display: none; padding-top: 50px; }
 
-        .monogram {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            color: var(--dorado);
-            border-top: 1px solid var(--dorado);
-            border-bottom: 1px solid var(--dorado);
-            padding: 10px 40px;
-            margin: 20px 0;
-        }
+        /* PORTADA CON CITA (Imagen 7) */
+        .hero { padding: 100px 20px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--dorado); margin-bottom: 20px; }
+        .cita { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; max-width: 600px; margin: 0 auto 40px; color: #a5b4ac; }
 
-        h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; letter-spacing: 2px; }
-
-        .btn-vino { background: var(--vino); color: white; border: none; padding: 15px 30px; border-radius: 5px; cursor: pointer; margin: 10px; font-weight: bold; text-transform: uppercase; }
-        .btn-outline { background: transparent; border: 1px solid var(--dorado); color: var(--dorado); padding: 15px 30px; border-radius: 5px; cursor: pointer; margin: 10px; font-weight: bold; text-transform: uppercase; text-decoration: none; display: inline-block; }
-
-        /* --- CONTADOR ESTILO BURBUJA (Imagen 2) --- */
-        .countdown-section { padding: 80px 20px; background: #f0f7f4; color: var(--verde); }
+        /* CONTADOR BURBUJA (Imagen 8) */
+        .countdown-container { background: #e8f0f2; padding: 100px 20px; color: #1b3022; position: relative; overflow: hidden; }
+        .wave { position: absolute; top: 0; left: 0; width: 100%; line-height: 0; }
         
-        .countdown-bubble {
-            background: white;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 8px double var(--dorado); /* Doble línea dorada como la foto */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .bubble {
+            background: white; width: 300px; height: 300px; border-radius: 50%;
+            margin: 0 auto 40px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border: 8px double var(--dorado); box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative; z-index: 2;
         }
+        .bubble h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-style: italic; margin-bottom: 10px; color: #1b3022; }
+        .timer { display: flex; gap: 15px; }
+        .timer span { font-size: 1.8rem; font-weight: bold; color: var(--dorado); display: block; }
+        .timer small { font-size: 0.7rem; text-transform: uppercase; color: #888; }
 
-        .countdown-bubble h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin: 0; color: var(--verde); }
+        /* INVITADOS (Imagen 8) */
+        .guest-badge { background: #1a3a5a; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold; }
+        .name-pill { background: #d1dce0; padding: 8px 25px; border-radius: 5px; display: inline-block; margin: 5px; color: #334155; font-size: 0.9rem; font-weight: 600; }
 
-        .timer-grid { display: flex; gap: 15px; margin-top: 10px; }
-        .timer-grid span { font-size: 1.8rem; font-weight: bold; color: var(--dorado); display: block; }
-        .timer-grid small { font-size: 0.7rem; color: #666; text-transform: uppercase; }
-
-        /* --- INVITADOS --- */
-        .guest-badge {
-            background: #1a3a5a; /* Azul oscuro como la imagen */
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 30px auto 10px;
-            font-weight: bold;
+        /* TARJETAS CON BANDERA (Imagen 9) */
+        .details { padding: 80px 20px; }
+        .card { background: var(--verde-tarjeta); border: 1px solid rgba(197, 160, 89, 0.3); padding: 60px 20px; margin: 40px auto; max-width: 500px; border-radius: 10px; }
+        .flag-title { 
+            background: #1a3a5a; color: white; padding: 10px 40px; display: inline-block; 
+            font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 30px;
+            position: relative;
         }
+        .flag-title::after { content: ''; position: absolute; right: -15px; top: 0; border-style: solid; border-width: 25px 0 25px 15px; border-color: transparent transparent transparent #1a3a5a; }
+        .flag-title::before { content: ''; position: absolute; left: -15px; top: 0; border-style: solid; border-width: 25px 15px 25px 0; border-color: transparent #1a3a5a transparent transparent; }
 
-        .guest-section h3 { letter-spacing: 5px; font-size: 1.5rem; margin-bottom: 5px; }
-        .guest-name { background: #e8f0f2; display: inline-block; padding: 5px 20px; margin: 5px; border-radius: 4px; color: #333; }
+        .info-block { margin-bottom: 25px; }
+        .info-block h4 { color: var(--dorado); letter-spacing: 3px; font-size: 0.9rem; margin-bottom: 5px; }
 
-        /* --- DETALLES --- */
-        .details { padding: 60px 20px; }
-        .card { border: 1px solid var(--dorado); padding: 40px; margin: 20px auto; max-width: 500px; border-radius: 10px; }
-        .card h3 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--dorado); }
-
-        /* MODALES */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
-        .modal-content { background: var(--verde); border: 2px solid var(--dorado); margin: 15% auto; padding: 30px; width: 85%; max-width: 400px; border-radius: 15px; }
+        /* FOOTER (Imagen 11) */
+        footer { padding: 80px 20px; background: #08100a; border-top: 1px solid rgba(197, 160, 89, 0.2); }
+        .footer-names { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--dorado); margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <p>Bienvenidos a la invitación de</p>
+    <div id="landing">
+        <p style="letter-spacing: 4px; margin-bottom: 10px;">BIENVENIDOS A LA INVITACIÓN DE</p>
         <div class="monogram">C&J</div>
-        <h1>CARLOS & JOSELYN</h1>
-        <p>La música de fondo es parte de la experiencia</p>
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 30px;">Carlos & Joselyn</h1>
+        <p style="font-style: italic; opacity: 0.8; margin-bottom: 30px;">La música es parte de la experiencia</p>
         <div>
-            <button class="btn-vino" onclick="start()">Ingresar con música</button>
-            <button class="btn-outline" onclick="start()">Ingresar sin música</button>
-        </div>
-    </section>
-
-    <section class="countdown-section">
-        <div class="countdown-bubble">
-            <h2>Falta</h2>
-            <div class="timer-grid">
-                <div><span id="d">00</span><small>Días</small></div>
-                <div><span id="h">00</span><small>Hs</small></div>
-                <div><span id="m">00</span><small>Min</small></div>
-                <div><span id="s">00</span><small>Seg</small></div>
-            </div>
-        </div>
-
-        <div class="guest-section">
-            <div class="guest-badge">3</div>
-            <h3>INVITADOS</h3>
-            <p>(1 acompañante)</p>
-            <div class="guest-name">Valentina Ruiz</div>
-            <div class="guest-name">Agustín Ruiz</div>
-            <p style="margin-top:20px; font-style: italic;">Será un día inolvidable y queremos vivirlo con vos.</p>
-        </div>
-    </section>
-
-    <section class="details">
-        <div class="card">
-            <div style="font-size: 3rem;">💍</div>
-            <h3>Ceremonia</h3>
-            <p>Sábado 19 de Diciembre - 04:00 pm</p>
-            <p><strong>LUGAR:</strong> Luna Azul, Pococí</p>
-            <a href="https://maps.app.goo.gl/TjhYtUM4mhmAkefN8" target="_blank" class="btn-outline">¿Cómo Llegar?</a>
-        </div>
-
-        <div class="card">
-            <div style="font-size: 3rem;">🥂</div>
-            <h3>Recepción</h3>
-            <p>Sábado 19 de Diciembre - 05:00 pm</p>
-            <button class="btn-outline" onclick="document.getElementById('m-conf').style.display='block'">Confirmar Asistencia</button>
-        </div>
-    </section>
-
-    <div id="m-conf" class="modal">
-        <div class="modal-content">
-            <h3 style="color:var(--dorado)">Confirmar</h3>
-            <p>Enviaremos tu confirmación a los novios.</p>
-            <button class="btn-vino" onclick="this.parentElement.parentElement.style.display='none'">Cerrar</button>
+            <button class="btn-vino" onclick="start(true)">Ingresar con música</button>
+            <button class="btn-outline" onclick="start(false)">Ingresar sin música</button>
         </div>
     </div>
 
+    <div id="main-content">
+        <section class="hero">
+            <h1>Carlos & Joselyn</h1>
+            <p class="cita">"El amor no consiste en mirarse el uno al otro, sino en mirar juntos en la misma dirección."</p>
+            <div style="font-size: 2rem;">💍</div>
+        </section>
+
+        <section class="countdown-container">
+            <div class="bubble">
+                <h2>Falta</h2>
+                <div class="timer">
+                    <div><span id="d">00</span><small>Días</small></div>
+                    <div><span id="h">00</span><small>Hs</small></div>
+                    <div><span id="m">00</span><small>Min</small></div>
+                    <div><span id="s">00</span><small>Seg</small></div>
+                </div>
+            </div>
+
+            <div class="guest-badge">3</div>
+            <h3 style="letter-spacing: 5px; color: #1a3a5a; margin-bottom: 20px;">INVITADOS</h3>
+            <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">(1 acompañante)</p>
+            <div class="name-pill">Valentina Ruiz</div>
+            <div class="name-pill">Agustín Ruiz</div>
+            <p style="margin-top: 30px; font-style: italic; color: #555;">Será un día inolvidable y queremos vivirlo con vos.</p>
+        </section>
+
+        <section class="details">
+            <div class="card">
+                <div style="font-size: 3rem; margin-bottom: 10px;">⛪</div>
+                <div class="flag-title">Ceremonia</div>
+                <div class="info-block">
+                    <h4>DÍA</h4>
+                    <p>Sábado 19 de Diciembre - 04:00 pm</p>
+                </div>
+                <div class="info-block">
+                    <h4>LUGAR</h4>
+                    <p>Luna Azul, Pococí</p>
+                </div>
+                <div class="info-block">
+                    <h4>DIRECCIÓN</h4>
+                    <p>Guápiles, Limón, Costa Rica</p>
+                </div>
+                <a href="https://maps.app.goo.gl/YourLink" target="_blank" class="btn-outline">¿Cómo Llegar?</a>
+            </div>
+
+            <div class="card">
+                <div style="font-size: 3rem; margin-bottom: 10px;">🥂</div>
+                <div class="flag-title">Celebración</div>
+                <div class="info-block">
+                    <h4>DÍA</h4>
+                    <p>Sábado 19 de Diciembre - 05:00 pm</p>
+                </div>
+                <div class="info-block">
+                    <h4>LUGAR</h4>
+                    <p>Luna Azul, Pococí</p>
+                </div>
+                <button class="btn-vino" style="width: 100%; margin: 10px 0;">Confirmar Asistencia</button>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-names">Carlos & Joselyn</div>
+            <p style="font-size: 0.8rem; letter-spacing: 2px;">19 DE DICIEMBRE, 2026</p>
+            <p style="margin-top: 40px; opacity: 0.5; font-size: 0.7rem;">Desarrollado con ❤️ por Fixdate</p>
+        </footer>
+    </div>
+
     <script>
+        function start(music) {
+            document.getElementById('landing').style.transform = 'translateY(-100%)';
+            document.getElementById('main-content').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
         const end = new Date('December 19, 2026 16:00:00').getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -165,10 +170,6 @@
             document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
         }, 1000);
-
-        function start() {
-            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-        }
     </script>
 </body>
 </html>
