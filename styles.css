@@ -1,12 +1,258 @@
+/* --- ESTILOS GENERALES Y RESETEADO --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 :root {
-  --verde-bosque: #1b3022;  /* Verde Esmeralda Profundo */
-  --dorado-mate: #c5a059;   /* Dorado elegante */
-  --vino-tinto: #6b1111;    /* Acento para botones */
-  --blanco-crema: #fdfaf5;  /* Para textos suaves sobre verde */
+    /* Nuestra paleta "Bosque Real" */
+    --verde-bosque: #1b3022;  /* Fondo principal */
+    --dorado-mate: #c5a059;   /* Textos principales y acentos */
+    --vino-tinto: #6b1111;    /* Fondo botones principales */
+    --blanco-crema: #fdfaf5;  /* Texto secundario sobre verde */
+    --overlay-color: rgba(0, 0, 0, 0.4); /* Capa oscura sobre fotos */
 }
 
 body {
-  background-color: var(--verde-bosque);
-  color: var(--blanco-crema);
-  font-family: 'Playfair Display', serif; /* Tipografía elegante */
+    background-color: var(--verde-bosque);
+    color: var(--blanco-crema);
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
+
+h1, h2, h3, .monogram, .welcome-text {
+    font-family: 'Playfair Display', serif;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 0;
+}
+
+/* --- ESTILOS DE COMPONENTES REUTILIZABLES --- */
+
+/* Botones con estilo Fixdate */
+button, .btn-outline {
+    display: inline-block;
+    padding: 14px 30px;
+    border-radius: 8px; /* Bordes ligeramente redondeados */
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin: 10px;
+}
+
+/* Botón Vino (Principal) */
+.btn-vino {
+    background-color: var(--vino-tinto);
+    color: var(--blanco-crema);
+    border: none;
+}
+
+.btn-vino:hover {
+    background-color: #8a1717;
+}
+
+/* Botón Outline (Secundario) */
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--dorado-mate);
+    color: var(--dorado-mate);
+}
+
+.btn-outline:hover {
+    background-color: var(--dorado-mate);
+    color: var(--verde-bosque);
+}
+
+/* --- SECCIONES ESPECÍFICAS --- */
+
+/* 1. PORTADA (Hero) */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: var(--blanco-crema);
+    /* Fondo con overlay oscuro para contraste */
+    background: linear-gradient(var(--overlay-color), var(--overlay-color)), url('assets/hero-bg.jpg') center/cover;
+}
+
+.welcome-text {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.monogram {
+    font-size: 6rem;
+    color: var(--dorado-mate);
+    border-top: 1px solid var(--dorado-mate);
+    border-bottom: 1px solid var(--dorado-mate);
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 25px 0;
+}
+
+.names {
+    font-size: 3.5rem;
+    color: var(--dorado-mate);
+    margin-bottom: 30px;
+}
+
+.music-note {
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+/* 2. CUENTA REGRESIVA Y UBICACIÓN (Countdown) */
+.countdown-section {
+    background-color: #16261c; /* Un verde ligeramente más oscuro para variación */
+}
+
+.quote {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--dorado-mate);
+    margin-bottom: 50px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Círculo de cuenta regresiva estilizado */
+.countdown-circle {
+    border: 3px solid var(--dorado-mate);
+    border-radius: 50%;
+    width: 320px;
+    height: 320px;
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+}
+
+.countdown-circle p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.timer-grid {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.timer-grid div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-grid span {
+    font-size: 2.2rem;
+    color: var(--dorado-mate);
+}
+
+.timer-grid small {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--blanco-crema);
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+/* Ubicación estilizada */
+.event-location {
+    font-size: 1.3rem;
+    color: var(--dorado-mate);
+    margin-top: 50px;
+}
+
+/* 3. DETALLES DEL EVENTO (Event Details) */
+.event-details {
+    background-color: var(--verde-bosque);
+}
+
+.detail-card {
+    background-color: #16261c; /* Fondo de tarjeta */
+    border: 2px solid var(--dorado-mate);
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-circle {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.detail-card h3 {
+    font-size: 2rem;
+    color: var(--dorado-mate);
+    margin-bottom: 25px;
+}
+
+.detail-card p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+/* 4. REGALOS (Gifts) */
+.gifts {
+    background-color: #16261c; /* Fondo de sección */
+}
+
+.gifts h3 {
+    font-size: 2rem;
+    color: var(--dorado-mate);
+    margin-bottom: 25px;
+}
+
+.gifts p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.gift-icon {
+    font-size: 3.5rem;
+    margin: 25px 0;
+}
+
+/* --- PIE DE PÁGINA (Footer) --- */
+footer {
+    background-color: var(--verde-bosque);
+    color: var(--blanco-crema);
+    padding: 40px 0;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(197, 160, 89, 0.3); /* Línea dorada sutil */
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+footer small {
+    color: rgba(253, 250, 245, 0.7);
+}
+
+/* --- ESTILOS DE MODALES (Añadir aquí) --- */
+/* (Copia y pega aquí tus estilos de modales que te pasé en el paso anterior) */
