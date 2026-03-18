@@ -1,258 +1,248 @@
-/* --- ESTILOS GENERALES Y RESETEADO --- */
+/* --- FUNDAMENTOS Y VARIABLES DE COLOR (Bosque Real) --- */
+:root {
+    /* Fondos */
+    --fondo-principal: #0d1a10;     /* Verde Esmeralda muy profundo (satura los fondos claros de 'Cielo') */
+    --fondo-tarjeta: #1a2e1d;        /* Verde Esmeralda oscuro para bloques y tarjetas */
+    --fondo-acento: #08100a;       /* Negro Esmeralda para overlay de fotos y footer */
+    
+    /* Textos */
+    --texto-principal: #c5a059;     /* Dorado Mate satinado (reemplaza azul oscuro/negro) */
+    --texto-secundario: rgba(253, 250, 245, 0.85); /* Blanco Crema suave (para textos largos sobre verde) */
+    --texto-suave: rgba(197, 160, 89, 0.6);   /* Dorado Mate suave */
+    
+    /* Elementos */
+    --color-acento-vino: #6b1111;   /* Vino Tinto profundo (reemplaza azul claro/cian en acentos) */
+    --borde-dorado: #c5a059;       /* Dorado Mate para líneas, círculos y pastillas de invitados */
+    --blanco-crema: #fdfaf5;       /* Blanco puro para el contador (Imagen 8) */
+    
+    /* Efectos */
+    --shadow-premium: 0 10px 30px rgba(0,0,0,0.25);
+    --shadow-dorado: 0 5px 20px rgba(197, 160, 89, 0.15);
+}
+
+/* --- RESETEADO Y TIPOGRAFÍA --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root {
-    /* Nuestra paleta "Bosque Real" */
-    --verde-bosque: #1b3022;  /* Fondo principal */
-    --dorado-mate: #c5a059;   /* Textos principales y acentos */
-    --vino-tinto: #6b1111;    /* Fondo botones principales */
-    --blanco-crema: #fdfaf5;  /* Texto secundario sobre verde */
-    --overlay-color: rgba(0, 0, 0, 0.4); /* Capa oscura sobre fotos */
-}
-
 body {
-    background-color: var(--verde-bosque);
-    color: var(--blanco-crema);
-    font-family: 'Montserrat', sans-serif;
+    background-color: var(--fondo-principal);
+    color: var(--texto-secundario);
+    font-family: 'Montserrat', sans-serif; /* Montserrat para cuerpo como 'Cielo' */
     text-align: center;
     line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
-h1, h2, h3, .monogram, .welcome-text {
-    font-family: 'Playfair Display', serif;
+/* Títulos elegantes como 'Cielo' pero en Dorado Mate */
+h1, h2, h3, .caligrafica, .monograma {
+    font-family: 'Playfair Display', serif; /* Playfair Display para títulos */
+    color: var(--texto-principal);
 }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 0;
-}
-
-/* --- ESTILOS DE COMPONENTES REUTILIZABLES --- */
-
-/* Botones con estilo Fixdate */
-button, .btn-outline {
+/* --- BOTONES CON ESTILO PREMIUM FIXDATE (Inspirado en Imagen 9) --- */
+button, .btn-fixdate {
     display: inline-block;
-    padding: 14px 30px;
-    border-radius: 8px; /* Bordes ligeramente redondeados */
+    padding: 14px 28px;
+    border-radius: 6px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     font-weight: 600;
     font-size: 0.9rem;
     letter-spacing: 1px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
     text-decoration: none;
     margin: 10px;
 }
 
-/* Botón Vino (Principal) */
+/* Botón Vino (Call to Action - Imagen 9 'Confirmar') */
 .btn-vino {
-    background-color: var(--vino-tinto);
-    color: var(--blanco-crema);
+    background-color: var(--color-acento-vino);
+    color: white;
     border: none;
 }
-
 .btn-vino:hover {
-    background-color: #8a1717;
+    background-color: #8e1818;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(107, 17, 17, 0.4);
 }
 
-/* Botón Outline (Secundario) */
-.btn-outline {
+/* Botón Outline Dorado (Secundario - Imagen 9 'Agendar'/'¿Cómo Llegar?') */
+.btn-outline-dorado {
     background: transparent;
-    border: 2px solid var(--dorado-mate);
-    color: var(--dorado-mate);
+    border: 2px solid var(--borde-dorado);
+    color: var(--texto-principal);
+}
+.btn-outline-dorado:hover {
+    background-color: var(--borde-dorado);
+    color: var(--fondo-principal);
+    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
 }
 
-.btn-outline:hover {
-    background-color: var(--dorado-mate);
-    color: var(--verde-bosque);
-}
+/* --- SECCIONES ESPECÍFICAS DE 'CIELO' ADAPTADAS --- */
 
-/* --- SECCIONES ESPECÍFICAS --- */
-
-/* 1. PORTADA (Hero) */
-.hero {
+/* 1. PORTADA CON FOTO (Inspirado en Imagen 7) */
+.hero-cielo {
     height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     position: relative;
-    color: var(--blanco-crema);
-    /* Fondo con overlay oscuro para contraste */
-    background: linear-gradient(var(--overlay-color), var(--overlay-color)), url('assets/hero-bg.jpg') center/cover;
+    /* Fondo con overlay oscuro para contraste (Imagen 7) */
+    background: linear-gradient(var(--fondo-acento), var(--fondo-acento)), url('assets/carlos-joselyn.jpg') center/cover;
 }
 
-.welcome-text {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-}
-
-.monogram {
+.monograma-lg {
     font-size: 6rem;
-    color: var(--dorado-mate);
-    border-top: 1px solid var(--dorado-mate);
-    border-bottom: 1px solid var(--dorado-mate);
+    color: var(--texto-principal);
+    border-top: 2px solid var(--borde-dorado);
+    border-bottom: 2px solid var(--borde-dorado);
     display: inline-block;
-    padding: 15px 30px;
-    margin: 25px 0;
-}
-
-.names {
-    font-size: 3.5rem;
-    color: var(--dorado-mate);
+    padding: 15px 40px;
     margin-bottom: 30px;
 }
 
-.music-note {
-    font-size: 1rem;
+.nombres {
+    font-size: 4rem;
+    letter-spacing: 2px;
     margin-bottom: 30px;
 }
 
-/* 2. CUENTA REGRESIVA Y UBICACIÓN (Countdown) */
-.countdown-section {
-    background-color: #16261c; /* Un verde ligeramente más oscuro para variación */
-}
-
-.quote {
-    font-size: 1.5rem;
+/* El bloque de cita de Danny & Sofía (Imagen 7) */
+.cita {
+    font-size: 1.4rem;
     font-style: italic;
-    color: var(--dorado-mate);
-    margin-bottom: 50px;
+    color: var(--texto-principal);
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
-/* Círculo de cuenta regresiva estilizado */
-.countdown-circle {
-    border: 3px solid var(--dorado-mate);
-    border-radius: 50%;
-    width: 320px;
-    height: 320px;
-    margin: 60px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 20px;
-}
-
-.countdown-circle p {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-.timer-grid {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-}
-
-.timer-grid div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.timer-grid span {
-    font-size: 2.2rem;
-    color: var(--dorado-mate);
-}
-
-.timer-grid small {
-    display: block;
-    font-size: 0.7rem;
-    color: var(--blanco-crema);
-    text-transform: uppercase;
-    margin-top: 5px;
-}
-
-/* Ubicación estilizada */
-.event-location {
-    font-size: 1.3rem;
-    color: var(--dorado-mate);
-    margin-top: 50px;
-}
-
-/* 3. DETALLES DEL EVENTO (Event Details) */
-.event-details {
-    background-color: var(--verde-bosque);
-}
-
-.detail-card {
-    background-color: #16261c; /* Fondo de tarjeta */
-    border: 2px solid var(--dorado-mate);
-    border-radius: 12px;
-    padding: 40px;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.icon-circle {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-.detail-card h3 {
-    font-size: 2rem;
-    color: var(--dorado-mate);
-    margin-bottom: 25px;
-}
-
-.detail-card p {
-    font-size: 1rem;
-    margin-bottom: 10px;
-}
-
-/* 4. REGALOS (Gifts) */
-.gifts {
-    background-color: #16261c; /* Fondo de sección */
-}
-
-.gifts h3 {
-    font-size: 2rem;
-    color: var(--dorado-mate);
-    margin-bottom: 25px;
-}
-
-.gifts p {
+/* El icono flotante de música (Imagen 7) */
+.icon-musica {
+    background-color: white; /* Círculo blanco como Imagen 7 */
+    color: var(--texto-principal);
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: absolute; top: 20px; right: 20px;
     font-size: 1.1rem;
+    box-shadow: var(--shadow-premium);
+}
+
+/* 2. CONTADOR ESTILO 'CIELO' (Burbuja Blanca - Imagen 8) */
+.countdown-section {
+    background-color: var(--fondo-tarjeta);
+    padding: 100px 20px;
+}
+
+.bubble-countdown {
+    background-color: var(--blanco-crema); /* Fondo blanco como Imagen 8 */
+    width: 300px; height: 300px; border-radius: 50%;
+    margin: 0 auto;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    border: 3px solid var(--borde-dorado); /* Borde dorado mate */
+    box-shadow: var(--shadow-premium);
+    position: relative;
+}
+
+/* El adorno floral azul de 'Cielo' (Imagen 8) -> Lo cambiamos por uno dorado sutil */
+.adorno-floral {
+    position: absolute;
+    top: -30px;
+    font-size: 2.5rem;
+    color: var(--texto-principal);
+}
+
+.bubble-countdown h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--texto-principal);
     margin-bottom: 15px;
 }
 
-.gift-icon {
-    font-size: 3.5rem;
-    margin: 25px 0;
+.timer-grid-fixdate {
+    display: flex;
+    gap: 20px;
 }
 
-/* --- PIE DE PÁGINA (Footer) --- */
-footer {
-    background-color: var(--verde-bosque);
-    color: var(--blanco-crema);
-    padding: 40px 0;
+.timer-grid-fixdate span {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--borde-dorado);
+}
+
+.timer-grid-fixdate small {
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+}
+
+/* 3. SECCIÓN DE INVITADOS (Pastillas de nombres - Imagen 8) */
+.pastilla-invitado {
+    background-color: #e2e8f0; /* Color gris de la Imagen 8 */
+    border-radius: 5px;
+    padding: 8px 25px;
+    display: inline-block;
+    margin: 5px;
+    color: #475569;
     font-size: 0.9rem;
-    border-top: 1px solid rgba(197, 160, 89, 0.3); /* Línea dorada sutil */
 }
 
-footer p {
-    margin-bottom: 10px;
+/* 4. SECCIÓN TARJETAS DE DETALLES (Inspirado en Imagen 9) */
+.tarjeta-detalle {
+    background: rgba(255, 255, 255, 0.05); /* Sutil transparencia */
+    border: 1px solid rgba(197, 160, 89, 0.4); /* Línea dorada sutil */
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 40px;
+    display: flex; flex-direction: column; align-items: center;
+    box-shadow: var(--shadow-dorado);
 }
 
-footer small {
-    color: rgba(253, 250, 245, 0.7);
+/* El bloque de título 'Ceremonia'/'Celebración' con bandera (Imagen 9) */
+.bloque-titulo-fixdate {
+    background-color: var(--fondo-acento); /* Color oscuro como Imagen 9 */
+    color: var(--blanco-crema);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    padding: 10px 30px;
+    position: relative;
+    border-radius: 4px;
+    margin-bottom: 30px;
 }
 
-/* --- ESTILOS DE MODALES (Añadir aquí) --- */
-/* (Copia y pega aquí tus estilos de modales que te pasé en el paso anterior) */
+/* Las banderas a los lados (Imagen 9) -> Recreadas con CSS */
+.bloque-titulo-fixdate::before, .bloque-titulo-fixdate::after {
+    content: '';
+    position: absolute;
+    width: 0; height: 0;
+    top: 0;
+}
+.bloque-titulo-fixdate::before { left: -10px; border-style: solid; border-width: 0 10px 20px 0; border-color: transparent var(--fondo-acento) transparent transparent; }
+.bloque-titulo-fixdate::after { right: -10px; border-style: solid; border-width: 20px 10px 0 0; border-color: var(--fondo-acento) transparent transparent transparent; }
+
+/* 5. SECCIÓN REGALOS (Minimalismo - Imagen 10) */
+.gift-minimalist {
+    padding: 100px 20px;
+    background-color: var(--fondo-tarjeta);
+}
+.gift-minimalist .icon-sobre {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: var(--texto-principal);
+}
+
+/* --- FOOTER (Imagen 11) --- */
+footer {
+    background-color: var(--fondo-acento);
+    color: var(--texto-suave);
+    padding: 60px 20px;
+    border-top: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+footer .branding-fixdate {
+    font-size: 1.2rem;
+    color: var(--texto-principal);
+}
