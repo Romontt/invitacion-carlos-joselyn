@@ -3,114 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boda de Carlos & Joselyn - 19.12.2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Boda de Carlos & Joselyn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --verde: #1b3022;
+            --dorado: #c5a059;
+            --vino: #6b1111;
+            --blanco: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--verde);
+            color: var(--blanco);
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+        }
+
+        /* --- PORTADA --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .monogram {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--dorado);
+            border-top: 1px solid var(--dorado);
+            border-bottom: 1px solid var(--dorado);
+            padding: 10px 40px;
+            margin: 20px 0;
+        }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; letter-spacing: 2px; }
+
+        .btn-vino { background: var(--vino); color: white; border: none; padding: 15px 30px; border-radius: 5px; cursor: pointer; margin: 10px; font-weight: bold; text-transform: uppercase; }
+        .btn-outline { background: transparent; border: 1px solid var(--dorado); color: var(--dorado); padding: 15px 30px; border-radius: 5px; cursor: pointer; margin: 10px; font-weight: bold; text-transform: uppercase; text-decoration: none; display: inline-block; }
+
+        /* --- CONTADOR ESTILO BURBUJA (Imagen 2) --- */
+        .countdown-section { padding: 80px 20px; background: #f0f7f4; color: var(--verde); }
+        
+        .countdown-bubble {
+            background: white;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 8px double var(--dorado); /* Doble línea dorada como la foto */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .countdown-bubble h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin: 0; color: var(--verde); }
+
+        .timer-grid { display: flex; gap: 15px; margin-top: 10px; }
+        .timer-grid span { font-size: 1.8rem; font-weight: bold; color: var(--dorado); display: block; }
+        .timer-grid small { font-size: 0.7rem; color: #666; text-transform: uppercase; }
+
+        /* --- INVITADOS --- */
+        .guest-badge {
+            background: #1a3a5a; /* Azul oscuro como la imagen */
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto 10px;
+            font-weight: bold;
+        }
+
+        .guest-section h3 { letter-spacing: 5px; font-size: 1.5rem; margin-bottom: 5px; }
+        .guest-name { background: #e8f0f2; display: inline-block; padding: 5px 20px; margin: 5px; border-radius: 4px; color: #333; }
+
+        /* --- DETALLES --- */
+        .details { padding: 60px 20px; }
+        .card { border: 1px solid var(--dorado); padding: 40px; margin: 20px auto; max-width: 500px; border-radius: 10px; }
+        .card h3 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--dorado); }
+
+        /* MODALES */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
+        .modal-content { background: var(--verde); border: 2px solid var(--dorado); margin: 15% auto; padding: 30px; width: 85%; max-width: 400px; border-radius: 15px; }
+    </style>
 </head>
 <body>
 
     <section class="hero">
-        <div class="overlay">
-            <p class="welcome-text">Bienvenidos a la invitación de</p>
-            <div class="monogram">C&J</div>
-            <h1 class="names">Carlos & Joselyn</h1>
-            <p class="music-note">La música de fondo es parte de la experiencia</p>
-            <div class="music-buttons">
-                <button class="btn-vino" onclick="playMusic()">Ingresar con música</button>
-                <button class="btn-outline" onclick="startExperience()">Ingresar sin música</button>
-            </div>
+        <p>Bienvenidos a la invitación de</p>
+        <div class="monogram">C&J</div>
+        <h1>CARLOS & JOSELYN</h1>
+        <p>La música de fondo es parte de la experiencia</p>
+        <div>
+            <button class="btn-vino" onclick="start()">Ingresar con música</button>
+            <button class="btn-outline" onclick="start()">Ingresar sin música</button>
         </div>
     </section>
 
     <section class="countdown-section">
-        <div class="container">
-            <h2 class="quote">"El amor no consiste en mirarse el uno al otro, sino en mirar juntos en la misma dirección."</h2>
-            
-            <div class="countdown-circle">
-                <p>Falta</p>
-                <div id="timer" class="timer-grid">
-                    <div><span id="days">00</span><small>DÍAS</small></div>
-                    <div><span id="hours">00</span><small>HS</small></div>
-                    <div><span id="minutes">00</span><small>MIN</small></div>
-                    <div><span id="seconds">00</span><small>SEG</small></div>
-                </div>
+        <div class="countdown-bubble">
+            <h2>Falta</h2>
+            <div class="timer-grid">
+                <div><span id="d">00</span><small>Días</small></div>
+                <div><span id="h">00</span><small>Hs</small></div>
+                <div><span id="m">00</span><small>Min</small></div>
+                <div><span id="s">00</span><small>Seg</small></div>
             </div>
+        </div>
 
-            <div class="guest-info">
-                <div class="guest-count-badge">3</div>
-                <h3>INVITADOS</h3>
-                <p class="family-names">Familia Rodríguez Pérez</p>
-                <p class="event-location">Luna Azul, Pococí</p>
-            </div>
+        <div class="guest-section">
+            <div class="guest-badge">3</div>
+            <h3>INVITADOS</h3>
+            <p>(1 acompañante)</p>
+            <div class="guest-name">Valentina Ruiz</div>
+            <div class="guest-name">Agustín Ruiz</div>
+            <p style="margin-top:20px; font-style: italic;">Será un día inolvidable y queremos vivirlo con vos.</p>
         </div>
     </section>
 
-    <section class="event-details">
-        <div class="detail-card ceremony">
-            <div class="icon-circle">💍</div>
+    <section class="details">
+        <div class="card">
+            <div style="font-size: 3rem;">💍</div>
             <h3>Ceremonia</h3>
-            <p><strong>DÍA:</strong> Sábado 19 de Diciembre - 04:00 pm</p>
-            <p><strong>LUGAR:</strong> Luna Azul</p>
-            <button class="btn-vino" onclick="agendarEvento('Ceremonia')">Agendar</button>
+            <p>Sábado 19 de Diciembre - 04:00 pm</p>
+            <p><strong>LUGAR:</strong> Luna Azul, Pococí</p>
             <a href="https://maps.app.goo.gl/TjhYtUM4mhmAkefN8" target="_blank" class="btn-outline">¿Cómo Llegar?</a>
         </div>
 
-        <div class="detail-card celebration">
-            <div class="icon-circle">🥂</div>
+        <div class="card">
+            <div style="font-size: 3rem;">🥂</div>
             <h3>Recepción</h3>
-            <p><strong>DÍA:</strong> Sábado 19 de Diciembre - 05:00 pm</p>
-            <p><strong>LUGAR:</strong> Luna Azul</p>
-            <button class="btn-vino" onclick="agendarEvento('Recepción')">Agendar</button>
-            <button class="btn-outline" onclick="openModal('modal-confirmacion')">Confirmar Asistencia</button>
+            <p>Sábado 19 de Diciembre - 05:00 pm</p>
+            <button class="btn-outline" onclick="document.getElementById('m-conf').style.display='block'">Confirmar Asistencia</button>
         </div>
     </section>
 
-    <section class="gifts">
-        <div class="container">
-            <h3>Regalos</h3>
-            <p>Si deseas regalarnos algo más que tu hermosa presencia...</p>
-            <div class="gift-icon">✉️</div>
-            <p>Nuestra mayor alegría es compartir con ustedes.</p>
-            <button class="btn-vino" onclick="openModal('modal-regalos')">Ver detalles de regalo</button>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-names">Carlos & Joselyn</div>
-        <p>19.12.2026</p>
-        <p><small>Desarrollado con ❤️ por Fixdate Costa Rica 🇨🇷</small></p>
-    </footer>
-
-    <div id="modal-confirmacion" class="modal">
+    <div id="m-conf" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('modal-confirmacion')">&times;</span>
-            <h3 class="gold-text">Confirmar Asistencia</h3>
-            <p>Nos encantaría que nos acompañes en este día tan especial.</p>
-            <form id="form-asistencia">
-                <input type="text" placeholder="Nombre Completo" required>
-                <select required>
-                    <option value="" disabled selected>¿Asistirás?</option>
-                    <option value="si">Sí, asistiré</option>
-                    <option value="no">No podré asistir</option>
-                </select>
-                <textarea placeholder="¿Alguna restricción alimenticia o mensaje para los novios?" rows="3"></textarea>
-                <button type="submit" class="btn-vino">Enviar Confirmación</button>
-            </form>
+            <h3 style="color:var(--dorado)">Confirmar</h3>
+            <p>Enviaremos tu confirmación a los novios.</p>
+            <button class="btn-vino" onclick="this.parentElement.parentElement.style.display='none'">Cerrar</button>
         </div>
     </div>
 
-    <div id="modal-regalos" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('modal-regalos')">&times;</span>
-            <div class="gift-icon-large">✉️</div>
-            <h3 class="gold-text">Lluvia de Sobres</h3>
-            <p>Tu presencia es nuestro mejor regalo, pero si deseas tener un detalle con nosotros, optamos por la modalidad de <strong>Lluvia de Sobres</strong>.</p>
-            <div class="divider"></div>
-            <p><small>Podrás depositar tu sobre en el buzón especial que estará ubicado en la entrada de la recepción en <strong>Luna Azul</strong>.</small></p>
-            <button class="btn-outline" onclick="closeModal('modal-regalos')">Entendido</button>
-        </div>
-    </div>
+    <script>
+        const end = new Date('December 19, 2026 16:00:00').getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = end - now;
+            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
 
-    <script src="script.js"></script>
+        function start() {
+            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
