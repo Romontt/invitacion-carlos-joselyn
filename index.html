@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boda de Carlos & Joselyn</title>
+    <title>Boda de Carlos & Joselyn - 19.12.2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Nuestra Paleta Bosque Real */
             --verde-fondo: #0d1a10;
             --verde-tarjeta: #1a2e1d;
             --dorado: #c5a059;
             --vino: #6b1111;
             --blanco-crema: #fdfaf5;
+            /* Replicando fondos suaves de 'Cielo' pero en nuestra paleta */
+            --celeste-suave-fondo: #f0f7f4; /* Un verde-gris muy claro */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,7 +23,7 @@
         /* --- LANDING (ENTRADA) --- */
         #landing {
             height: 100vh; width: 100%; position: fixed; z-index: 1000;
-            background: linear-gradient(rgba(13,26,16,0.8), rgba(13,26,16,0.9)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1350&q=80') center/cover;
+            background: linear-gradient(rgba(13,26,16,0.8), rgba(13,26,16,0.9)), url('assets/hero-placeholder.jpg') center/cover;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: transform 0.8s ease-in-out;
         }
@@ -28,36 +31,57 @@
         .btn-vino { background: var(--vino); color: white; border: none; padding: 15px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 10px; }
         .btn-outline { background: transparent; border: 1px solid var(--dorado); color: var(--dorado); padding: 15px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; text-decoration: none; display: inline-block; }
 
-        /* --- CONTENIDO PRINCIPAL --- */
+        /* --- CONTENIDO PRINCIPAL CON CURVAS Y DECORACIONES --- */
         #main-content { display: none; padding-top: 50px; }
 
-        /* PORTADA CON CITA (Imagen 7) */
-        .hero { padding: 100px 20px; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--dorado); margin-bottom: 20px; }
-        .cita { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; max-width: 600px; margin: 0 auto 40px; color: #a5b4ac; }
+        /* PORTADA CON CITA Y FLORALES (Inspirado en Imagen 12) */
+        .hero { padding: 100px 20px; position: relative; }
+        
+        /* Placeholders para flores doradas/vino (reemplazando azules de Imagen 12) */
+        .flower-top { position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 250px; opacity: 0.8; }
+        .flower-bottom { position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); width: 250px; opacity: 0.8; }
 
-        /* CONTADOR BURBUJA (Imagen 8) */
-        .countdown-container { background: #e8f0f2; padding: 100px 20px; color: #1b3022; position: relative; overflow: hidden; }
-        .wave { position: absolute; top: 0; left: 0; width: 100%; line-height: 0; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--dorado); margin-bottom: 20px; position: relative; z-index: 2; }
+        .cita { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; max-width: 600px; margin: 0 auto 40px; color: #a5b4ac; position: relative; z-index: 2; }
+
+        /* SECCIÓN CONTADOR CON CURVA Y BURBUJA (Imagen 13) */
+        .countdown-container { 
+            background: var(--celeste-suave-fondo); 
+            padding: 150px 20px 100px; 
+            color: #1b3022; 
+            position: relative; 
+            overflow: hidden; 
+            margin-top: -50px; /* Para integrar con la curva */
+        }
+        
+        /* Replicando la curva suave (wave) de la Imagen 13 */
+        .wave { position: absolute; top: 0; left: 0; width: 100%; height: 100px; background: var(--verde-fondo); border-radius: 0 0 50% 50% / 0 0 100% 100%; }
         
         .bubble {
-            background: white; width: 300px; height: 300px; border-radius: 50%;
+            background: white; width: 320px; height: 320px; border-radius: 50%;
             margin: 0 auto 40px; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            border: 8px double var(--dorado); box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 8px double var(--dorado); box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             position: relative; z-index: 2;
         }
+
+        /* Flor sutil sobre el contador (como Imagen 13) */
+        .flower-bubble { position: absolute; top: -30px; font-size: 2.5rem; color: var(--dorado); }
+
         .bubble h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-style: italic; margin-bottom: 10px; color: #1b3022; }
         .timer { display: flex; gap: 15px; }
         .timer span { font-size: 1.8rem; font-weight: bold; color: var(--dorado); display: block; }
         .timer small { font-size: 0.7rem; text-transform: uppercase; color: #888; }
 
-        /* INVITADOS (Imagen 8) */
+        /* INVITADOS CON PASTILLAS GRISES (Imagen 13) */
+        .guests-section { position: relative; z-index: 2; }
         .guest-badge { background: #1a3a5a; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold; }
         .name-pill { background: #d1dce0; padding: 8px 25px; border-radius: 5px; display: inline-block; margin: 5px; color: #334155; font-size: 0.9rem; font-weight: 600; }
 
-        /* TARJETAS CON BANDERA (Imagen 9) */
-        .details { padding: 80px 20px; }
-        .card { background: var(--verde-tarjeta); border: 1px solid rgba(197, 160, 89, 0.3); padding: 60px 20px; margin: 40px auto; max-width: 500px; border-radius: 10px; }
+        /* SECCIÓN DETALLES CON TARJETAS Y ICONOS (Imagen 14) */
+        .details { padding: 80px 20px; background: var(--verde-fondo); }
+        .card { background: var(--verde-tarjeta); border: 1px solid rgba(197, 160, 89, 0.3); padding: 60px 20px; margin: 40px auto; max-width: 500px; border-radius: 10px; position: relative; }
+        
+        /* El "Banderín" de título (Imagen 14) */
         .flag-title { 
             background: #1a3a5a; color: white; padding: 10px 40px; display: inline-block; 
             font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 30px;
@@ -67,10 +91,20 @@
         .flag-title::before { content: ''; position: absolute; left: -15px; top: 0; border-style: solid; border-width: 25px 15px 25px 0; border-color: transparent #1a3a5a transparent transparent; }
 
         .info-block { margin-bottom: 25px; }
-        .info-block h4 { color: var(--dorado); letter-spacing: 3px; font-size: 0.9rem; margin-bottom: 5px; }
+        .info-block h4 { color: var(--dorado); letter-spacing: 3px; font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase;}
 
-        /* FOOTER (Imagen 11) */
-        footer { padding: 80px 20px; background: #08100a; border-top: 1px solid rgba(197, 160, 89, 0.2); }
+        /* SECCIÓN REGALOS MINIMALISTA (Imagen 15) */
+        .gifts { padding: 100px 20px; background: var(--celeste-suave-fondo); color: #1b3022; text-align: center; }
+        .gifts h3 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--dorado); margin-bottom: 20px; }
+        .gifts p { max-width: 500px; margin: 0 auto 30px; }
+        .gift-icon { font-size: 4rem; margin-bottom: 30px; color: var(--dorado); }
+
+        /* FOOTER (Imagen 16) */
+        footer { padding: 80px 20px; background: #08100a; border-top: 1px solid rgba(197, 160, 89, 0.2); position: relative; }
+        
+        /* Placeholder para flor en el footer (como Imagen 16) */
+        .flower-footer { position: absolute; bottom: 10px; right: 10px; width: 150px; opacity: 0.5; }
+
         .footer-names { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--dorado); margin-bottom: 20px; }
     </style>
 </head>
@@ -89,14 +123,18 @@
 
     <div id="main-content">
         <section class="hero">
+            <img src="assets/flower-top.png" alt="" class="flower-top">
+            
             <h1>Carlos & Joselyn</h1>
             <p class="cita">"El amor no consiste en mirarse el uno al otro, sino en mirar juntos en la misma dirección."</p>
             <div style="font-size: 2rem;">💍</div>
+
+            <img src="assets/flower-bottom.png" alt="" class="flower-bottom">
         </section>
 
         <section class="countdown-container">
-            <div class="bubble">
-                <h2>Falta</h2>
+            <div class="wave"></div> <div class="bubble">
+                <span class="flower-bubble">✨</span> <h2>Falta</h2>
                 <div class="timer">
                     <div><span id="d">00</span><small>Días</small></div>
                     <div><span id="h">00</span><small>Hs</small></div>
@@ -105,12 +143,14 @@
                 </div>
             </div>
 
-            <div class="guest-badge">3</div>
-            <h3 style="letter-spacing: 5px; color: #1a3a5a; margin-bottom: 20px;">INVITADOS</h3>
-            <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">(1 acompañante)</p>
-            <div class="name-pill">Valentina Ruiz</div>
-            <div class="name-pill">Agustín Ruiz</div>
-            <p style="margin-top: 30px; font-style: italic; color: #555;">Será un día inolvidable y queremos vivirlo con vos.</p>
+            <div class="guests-section">
+                <div class="guest-badge">3</div>
+                <h3 style="letter-spacing: 5px; color: #1a3a5a; margin-bottom: 20px;">INVITADOS</h3>
+                <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">(1 acompañante)</p>
+                <div class="name-pill">Valentina Ruiz</div>
+                <div class="name-pill">Agustín Ruiz</div>
+                <p style="margin-top: 30px; font-style: italic; color: #555;">Será un día inolvidable y queremos vivirlo con vos.</p>
+            </div>
         </section>
 
         <section class="details">
@@ -129,7 +169,10 @@
                     <h4>DIRECCIÓN</h4>
                     <p>Guápiles, Limón, Costa Rica</p>
                 </div>
-                <a href="https://maps.app.goo.gl/YourLink" target="_blank" class="btn-outline">¿Cómo Llegar?</a>
+                <div style="margin-top: 25px;">
+                    <button class="btn-outline">Agendar</button>
+                    <a href="https://maps.app.goo.gl/YourLink" target="_blank" class="btn-outline">¿Cómo Llegar?</a>
+                </div>
             </div>
 
             <div class="card">
@@ -143,14 +186,26 @@
                     <h4>LUGAR</h4>
                     <p>Luna Azul, Pococí</p>
                 </div>
-                <button class="btn-vino" style="width: 100%; margin: 10px 0;">Confirmar Asistencia</button>
+                <div style="margin-top: 25px;">
+                    <button class="btn-outline">Agendar</button>
+                    <button class="btn-vino" onclick="alert('Formulario de confirmación...')">Confirmar Asistencia</button>
+                </div>
             </div>
+        </section>
+
+        <section class="gifts">
+            <h3>Regalos</h3>
+            <p>Nuestra mayor alegría es compartir con ustedes.</p>
+            <div class="gift-icon">✉️</div>
+            <p>Si desean tener un detalle, tendremos lluvia de sobres el día del evento.</p>
         </section>
 
         <footer>
             <div class="footer-names">Carlos & Joselyn</div>
             <p style="font-size: 0.8rem; letter-spacing: 2px;">19 DE DICIEMBRE, 2026</p>
             <p style="margin-top: 40px; opacity: 0.5; font-size: 0.7rem;">Desarrollado con ❤️ por Fixdate</p>
+            
+            <img src="assets/flower-footer.png" alt="" class="flower-footer">
         </footer>
     </div>
 
