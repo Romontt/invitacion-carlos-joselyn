@@ -3,253 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carlos & Joselyn - Boda</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+    <title>Boda de Carlos & Joselyn - 19.12.2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --verde: #0d1a10;
-            --verde-claro: #1a2e1d;
-            --dorado: linear-gradient(135deg, #c5a059 0%, #f1d39b 50%, #c5a059 100%);
-            --dorado-solido: #c5a059;
-            --vino: #6b1111;
-            --crema: #fdfaf5;
+            --verde-profundo: #0d1a10;
+            --verde-tarjeta: #1a2e1d;
+            --dorado-mate: #c5a059;
+            --dorado-brillo: #e6c78c;
+            --vino-tinto: #6b1111;
+            --vino-brillo: #8e1818;
+            --blanco-crema: #fdfaf5;
+            --overlay-oscuro: rgba(13, 26, 16, 0.9);
+            --azul-fixdate: #1a3a5a; /* El azul de las capturas */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--verde); color: var(--crema); overflow-x: hidden; }
-
-        /* --- DECORACIONES CSS (FLORES/ORNAMENTOS SIMULADOS) --- */
-        .ornamento {
-            font-family: 'Playfair Display', serif;
-            color: var(--dorado-solido);
-            font-size: 2rem;
-            display: block;
-            margin: 20px 0;
-            position: relative;
-        }
-        .ornamento::before, .ornamento::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            width: 50px;
-            height: 1px;
-            background: var(--dorado-solido);
-        }
-        .ornamento::before { right: 60%; }
-        .ornamento::after { left: 60%; }
-
-        /* --- LANDING --- */
-        #landing {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle, var(--verde-claro) 0%, var(--verde) 100%);
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--verde-profundo);
+            color: var(--blanco-crema);
             text-align: center;
-            padding: 20px;
-            position: relative;
+            line-height: 1.8;
+            overflow-x: hidden;
         }
 
-        /* Marco decorativo CSS en la Landing */
-        .marco-landing {
-            position: absolute;
-            top: 20px; bottom: 20px; left: 20px; right: 20px;
-            border: 1px solid var(--dorado-solido);
+        /* --- DETALLE: MARCO DORADO PREMIUM --- */
+        .decoration-frame {
+            position: fixed;
+            top: 20px; left: 20px; right: 20px; bottom: 20px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
             pointer-events: none;
+            z-index: 999;
         }
 
-        .monograma {
+        /* --- DETALLE: ORNAMENTOS CSS --- */
+        .divider-ornament {
             font-family: 'Playfair Display', serif;
+            color: var(--dorado-mate);
+            font-size: 1.5rem;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .divider-ornament::before, .divider-ornament::after {
+            content: "";
+            height: 1px;
+            width: 40px;
+            background: linear-gradient(to right, transparent, var(--dorado-mate));
+        }
+        .divider-ornament::after { background: linear-gradient(to left, transparent, var(--dorado-mate)); }
+
+        h1, h2, h3, .monograma {
+            font-family: 'Playfair Display', serif;
+            color: var(--dorado-mate);
+        }
+
+        .text-soft {
+            font-weight: 200;
+            letter-spacing: 3px;
+            color: rgba(253, 250, 245, 0.7);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        /* --- BOTONES CON SOMBRA Y GRADIENTE --- */
+        button, .btn-fixdate {
+            padding: 16px 35px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: 0.4s;
+            margin: 10px;
+            border: none;
+        }
+
+        .btn-vino {
+            background: linear-gradient(135deg, var(--vino-tinto), #4a0c0c);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .btn-vino:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+
+        .btn-outline-dorado {
+            background: transparent;
+            border: 1px solid var(--dorado-mate) !important;
+            color: var(--dorado-mate);
+        }
+
+        /* --- LANDING PAGE --- */
+        #landing {
+            height: 100vh; width: 100%; position: fixed; z-index: 1000;
+            background: linear-gradient(var(--overlay-oscuro), var(--overlay-oscuro)), url('assets/carlos-joselyn-hero.jpg') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: 1s ease-in-out;
+        }
+        .landing-hidden { transform: scale(1.1); opacity: 0; pointer-events: none; }
+
+        .monogram-metal {
             font-size: 5rem;
-            background: var(--dorado);
+            background: linear-gradient(135deg, var(--dorado-mate), var(--dorado-brillo), var(--dorado-mate));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            border-top: 1px solid rgba(197, 160, 89, 0.4);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.4);
+            padding: 10px 40px;
+            margin-bottom: 20px;
         }
 
-        /* --- CONTENIDO PRINCIPAL --- */
-        .section-padding { padding: 80px 20px; position: relative; }
+        /* --- CONTENIDO --- */
+        #main-invitation { display: none; opacity: 0; transition: 1.2s; }
+        .show-invitation { display: block !important; opacity: 1 !important; }
 
-        /* SECCIÓN CURVA (Inspirada en Imagen 13) */
-        .curva-top {
-            background-color: #f0f7f4;
-            color: #1a2e1d;
-            border-radius: 100% 100% 0 0 / 15% 15% 0 0;
-            margin-top: -50px;
-            padding-top: 100px;
-        }
+        .hero-fixdate { padding: 100px 20px; }
+        .cita { font-style: italic; font-size: 1.3rem; max-width: 600px; margin: 30px auto; color: var(--blanco-crema); opacity: 0.9; }
 
-        /* CONTADOR BURBUJA CON SOMBRA (Imagen 13) */
-        .bubble {
-            background: white;
-            width: 280px; height: 280px;
-            border-radius: 50%;
-            margin: 0 auto 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border: 4px double var(--dorado-solido);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-        .bubble h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-style: italic; color: var(--dorado-solido); }
-
-        /* TARJETAS DE DETALLES (Imagen 14) */
-        .card {
-            background: var(--verde-claro);
-            max-width: 500px;
-            margin: 40px auto;
-            padding: 50px 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* --- SECCIÓN CIELO (CURVAS) --- */
+        .countdown-container {
+            background-color: #f4f7f6; /* Tono cielo claro */
+            color: var(--azul-fixdate);
+            padding: 120px 20px;
             position: relative;
+            /* DETALLE: La curva superior (Wave) */
+            border-radius: 50% 50% 0 0 / 10% 10% 0 0;
+            margin-top: -50px;
         }
 
-        /* El Banderín Azul (Imagen 14) hecho con CSS */
-        .flag-title {
-            background: #1a3a5a;
-            color: white;
-            padding: 10px 30px;
-            display: inline-block;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
+        .bubble-countdown {
+            background: white; width: 280px; height: 280px; border-radius: 50%;
+            margin: 0 auto 50px; display: flex; flex-direction: column; justify-content: center;
+            border: 4px double var(--dorado-mate);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        .flag-title::before {
-            content: "";
-            position: absolute;
-            left: -15px; top: 0;
-            border-style: solid;
-            border-width: 23px 15px 23px 0;
-            border-color: transparent #1a3a5a transparent transparent;
-        }
-        .flag-title::after {
-            content: "";
-            position: absolute;
-            right: -15px; top: 0;
-            border-style: solid;
-            border-width: 23px 0 23px 15px;
-            border-color: transparent transparent transparent #1a3a5a;
+        .bubble-countdown h2 { font-style: italic; color: var(--dorado-mate); font-size: 2.2rem; }
+
+        /* DETALLE: PASTILLAS DE NOMBRES */
+        .guest-badge { background: var(--azul-fixdate); color: white; width: 45px; height: 45px; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .name-pill-cielo { background: #dce4e8; padding: 8px 25px; border-radius: 20px; display: inline-block; margin: 5px; color: var(--azul-fixdate); font-size: 0.85rem; font-weight: 600; }
+
+        /* --- TARJETAS CON BANDERÍN --- */
+        .details-fixdate { padding: 100px 20px; }
+        .card-cielo { 
+            background: var(--verde-tarjeta);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 70px 30px 40px;
+            margin: 60px auto;
+            max-width: 500px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
-        /* BOTONES PREMIUM */
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            margin: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: 0.3s;
-            cursor: pointer;
+        /* DETALLE: EL BANDERÍN AZUL */
+        .flag-title-fixdate { 
+            background: var(--azul-fixdate); color: white; padding: 10px 40px; 
+            font-family: 'Playfair Display', serif; font-size: 1.6rem;
+            position: absolute; top: -25px; left: 50%; transform: translateX(-50%);
+            border-radius: 2px;
         }
-        .btn-vino { background: var(--vino); color: white; border: none; }
-        .btn-dorado { border: 1px solid var(--dorado-solido); color: var(--dorado-solido); background: transparent; }
+        .flag-title-fixdate::before, .flag-title-fixdate::after {
+            content: ''; position: absolute; top: 0; border-style: solid; border-width: 22px 15px;
+        }
+        .flag-title-fixdate::before { left: -15px; border-color: transparent var(--azul-fixdate) transparent transparent; }
+        .flag-title-fixdate::after { right: -15px; border-color: transparent transparent transparent var(--azul-fixdate); }
 
-        /* INVITADOS (Imagen 13) */
-        .guest-circle {
-            background: #1a3a5a; color: white;
-            width: 50px; height: 50px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 20px; font-weight: bold;
-        }
-        .pill {
-            background: #d1dce0; color: #333;
-            padding: 8px 20px; border-radius: 20px;
-            display: inline-block; margin: 5px; font-size: 0.9rem; font-weight: 600;
-        }
+        .info-label { color: var(--dorado-mate); letter-spacing: 3px; font-size: 0.7rem; font-weight: 400; margin: 15px 0 5px; }
 
-        .timer { display: flex; justify-content: center; gap: 15px; }
-        .timer div { font-weight: bold; font-size: 1.2rem; color: #333; }
-        .timer small { display: block; font-size: 0.6rem; text-transform: uppercase; color: #888; }
+        /* SECCIÓN REGALOS */
+        .gifts-cielo { padding: 100px 20px; background: #f4f7f6; color: var(--azul-fixdate); border-radius: 0 0 50% 50% / 5% 5% 0 0; }
+
+        /* MODAL */
+        .modal-content { background: var(--verde-profundo); border: 1px solid var(--dorado-mate); border-radius: 15px; }
     </style>
 </head>
 <body>
+    <div class="decoration-frame"></div>
 
     <div id="landing">
-        <div class="marco-landing"></div>
-        <p style="letter-spacing: 5px; font-weight: 200;">BODA DE</p>
-        <div class="monograma">C & J</div>
-        <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px;">Carlos & Joselyn</h1>
-        <div class="ornamento">❦</div>
-        <p style="font-style: italic; opacity: 0.7; margin-bottom: 30px;">"Nuestra historia comienza aquí"</p>
-        <button class="btn btn-vino" onclick="start()">Entrar a la Invitación</button>
+        <p class="text-soft">Bienvenidos a la invitación de</p>
+        <div class="monogram-metal">C&J</div>
+        <h1 class="nombres-landing">Carlos & Joselyn</h1>
+        <div class="divider-ornament">❦</div>
+        <div class="landing-btns">
+            <button class="btn-vino" onclick="enterInvite(true)">Ingresar con música</button>
+            <button class="btn-outline-dorado" onclick="enterInvite(false)">Sin música</button>
+        </div>
     </div>
 
-    <div id="content" style="display: none;">
-        <section class="section-padding" style="text-align: center;">
-            <div class="ornamento">❧</div>
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--dorado-solido);">Carlos & Joselyn</h2>
-            <p style="font-style: italic; max-width: 600px; margin: 20px auto; opacity: 0.8;">"Y ahora permanecen la fe, la esperanza y el amor, estos tres; pero el mayor de ellos es el amor."</p>
+    <div id="main-invitation">
+        <section class="hero-fixdate">
+            <div class="divider-ornament">❧</div>
+            <h1>Carlos & Joselyn</h1>
+            <p class="cita">"El amor no consiste en mirarse el uno al otro, sino en mirar juntos en la misma dirección."</p>
+            <p class="text-soft">19 de Diciembre | Luna Azul</p>
+            <div style="font-size: 2.5rem; margin-top: 30px; filter: sepia(1) saturate(2) hue-rotate(350deg);">💍</div>
         </section>
 
-        <section class="section-padding curva-top">
-            <div class="bubble">
-                <p style="text-transform: uppercase; letter-spacing: 3px; font-size: 0.7rem; color: #888;">Faltan</p>
-                <h2 id="clock">00:00:00</h2>
-                <div class="timer">
+        <section class="countdown-container">
+            <div class="bubble-countdown">
+                <p class="text-soft" style="color:#aaa">Falta</p>
+                <div class="timer-fixdate">
                     <div><span id="days">00</span><small>Días</small></div>
                     <div><span id="hours">00</span><small>Hs</small></div>
                     <div><span id="mins">00</span><small>Min</small></div>
                 </div>
             </div>
 
-            <div class="guest-circle">3</div>
-            <h3 style="letter-spacing: 5px; margin-bottom: 20px; color: #1a3a5a;">INVITADOS</h3>
-            <div class="pill">Valentina Ruiz</div>
-            <div class="pill">Agustín Ruiz</div>
-            <p style="margin-top: 30px; font-style: italic; color: #666;">¡Nos encantaría que nos acompañen!</p>
-        </section>
-
-        <section class="section-padding" style="background-color: var(--verde);">
-            <div class="card">
-                <div class="flag-title">Ceremonia</div>
-                <div style="font-size: 3rem; margin-bottom: 15px;">⛪</div>
-                <p style="color: var(--dorado-solido); letter-spacing: 3px; font-size: 0.8rem;">LUGAR</p>
-                <p style="font-size: 1.2rem; margin-bottom: 20px;">Luna Azul, Pococí</p>
-                <p style="color: var(--dorado-solido); letter-spacing: 3px; font-size: 0.8rem;">DÍA Y HORA</p>
-                <p style="font-size: 1.2rem; margin-bottom: 30px;">19 de Dic, 2026 - 4:00 PM</p>
-                <a href="#" class="btn btn-dorado">¿Cómo llegar?</a>
-            </div>
-
-            <div class="card">
-                <div class="flag-title">Celebración</div>
-                <div style="font-size: 3rem; margin-bottom: 15px;">🥂</div>
-                <p style="color: var(--dorado-solido); letter-spacing: 3px; font-size: 0.8rem;">RECEPCIÓN</p>
-                <p style="font-size: 1.2rem; margin-bottom: 30px;">Luna Azul, Salón Principal</p>
-                <a href="#" class="btn btn-vino">Confirmar Asistencia</a>
+            <div class="guests-cielo">
+                <div class="guest-badge">3</div>
+                <h3 style="letter-spacing: 4px; color: var(--azul-fixdate);">INVITADOS</h3>
+                <div class="name-pill-cielo">Valentina Ruiz</div>
+                <div class="name-pill-cielo">Agustín Ruiz</div>
+                <p style="margin-top: 30px; font-style: italic; font-size: 0.9rem;">¡Los esperamos con mucha alegría!</p>
             </div>
         </section>
 
-        <footer style="padding: 60px 20px; text-align: center; border-top: 1px solid rgba(197,160,89,0.2);">
-            <div class="monograma" style="font-size: 2.5rem;">C&J</div>
-            <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.6;">GUÁPILES, COSTA RICA</p>
+        <section class="details-fixdate">
+            <div class="card-cielo">
+                <div class="flag-title-fixdate">Ceremonia</div>
+                <div style="font-size: 2.5rem; margin-bottom: 10px;">⛪</div>
+                <p class="info-label">DÍA Y HORA</p>
+                <p>Sábado 19 de Diciembre - 04:00 pm</p>
+                <p class="info-label">LUGAR</p>
+                <p>Luna Azul, Pococí</p>
+                <div style="margin-top: 30px;">
+                    <button class="btn-vino">Confirmar</button>
+                    <button class="btn-outline-dorado">Mapa</button>
+                </div>
+            </div>
+
+            <div class="card-cielo">
+                <div class="flag-title-fixdate">Celebración</div>
+                <div style="font-size: 2.5rem; margin-bottom: 10px;">🥂</div>
+                <p class="info-label">RECEPCIÓN</p>
+                <p>Luna Azul, Salón Principal</p>
+                <p class="info-label">HORA</p>
+                <p>05:00 pm</p>
+                <button class="btn-vino" style="width: 80%; margin-top: 20px;">Confirmar Asistencia</button>
+            </div>
+        </section>
+
+        <section class="gifts-cielo">
+            <h3 style="color: var(--dorado-mate); font-size: 2.5rem;">Regalos</h3>
+            <p style="margin: 20px 0;">Tu presencia es nuestro mejor regalo.</p>
+            <div style="font-size: 3rem; margin-bottom: 20px;">✉️</div>
+            <button class="btn-vino" onclick="document.getElementById('m-gifts').style.display='block'">Detalles de Cuenta</button>
+        </section>
+
+        <footer style="padding: 80px 20px;">
+            <div class="monograma" style="font-size: 3rem; border: none;">C&J</div>
+            <p class="text-soft">19 DE DICIEMBRE, 2026</p>
+            <p style="margin-top: 40px; font-size: 0.6rem; opacity: 0.4; letter-spacing: 2px;">FIXDATE COSTA RICA</p>
         </footer>
     </div>
 
+    <div id="m-gifts" class="modal">
+        <div class="modal-content">
+            <h3 style="color: var(--dorado-mate); font-family: 'Playfair Display'; font-size: 2rem; margin-bottom: 20px;">Lluvia de Sobres</h3>
+            <p style="padding: 20px; font-size: 0.9rem;">Agradecemos tu detalle a través de lluvia de sobres el día de la boda o transferencia bancaria.</p>
+            <button class="btn-vino" onclick="document.getElementById('m-gifts').style.display='none'">Cerrar</button>
+        </div>
+    </div>
+
     <script>
-        function start() {
-            document.getElementById('landing').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
-            window.scrollTo(0,0);
+        function enterInvite(music) {
+            document.getElementById('landing').classList.add('landing-hidden');
+            setTimeout(() => {
+                document.getElementById('main-invitation').classList.add('show-invitation');
+                document.getElementById('landing').style.display = 'none';
+            }, 1000);
         }
 
-        // Contador simple
-        const target = new Date('Dec 19, 2026 16:00:00').getTime();
+        const target = new Date('December 19, 2026 16:00:00').getTime();
         setInterval(() => {
             const now = new Date().getTime();
-            const diff = target - now;
-            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const d = target - now;
+            document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('mins').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
         }, 1000);
     </script>
 </body>
